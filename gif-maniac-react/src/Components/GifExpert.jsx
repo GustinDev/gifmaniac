@@ -1,24 +1,29 @@
 import { useState } from 'react';
 import AddCategory from './AddCategory';
+import GifGrid from './GifGrid';
 
 function GifExpert() {
-  const [categories, setCategories] = useState(['One Punch', 'Goku']);
+  const [categories, setCategories] = useState([]);
 
-  let addCategory = () => {
-    setCategories([...categories, 'Valorant']);
+  let onAddCategory = (newCategory) => {
+    setCategories([newCategory, ...categories]);
+  };
+
+  let onReset = () => {
+    setCategories([]);
   };
 
   return (
     <div>
       {/* 1. Titutlo */}
       <h1>GIF MANIAC</h1>
+      <button onClick={onReset}>Resetear</button>
       {/* Input */}
-      <AddCategory />
-      <button onClick={addCategory}>Add</button>
+      <AddCategory onNewCategory={(value) => onAddCategory(value)} />
       {/* INPUT */}
-      {categories.map((category, index) => {
-        return <li key={index}>{category}</li>;
-      })}
+      {categories.map((category, i) => (
+        <GifGrid key={category + i} category={category} />
+      ))}
       {/* LISTADO */}
     </div>
   );

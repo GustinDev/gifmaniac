@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-function AddCategory() {
-  const [inputValue, setInputValue] = useState('second');
+// eslint-disable-next-line react/prop-types
+function AddCategory({ onNewCategory }) {
+  const [inputValue, setInputValue] = useState('');
 
   //Relación 1:
   //Le pasamos el evento y a el estado le pasamos target.value
@@ -11,9 +12,9 @@ function AddCategory() {
 
   let onSubmit = (event) => {
     event.preventDefault();
+    onNewCategory(inputValue);
+    setInputValue('');
   };
-
-  console.log(inputValue);
 
   return (
     <div>
